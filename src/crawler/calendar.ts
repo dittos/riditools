@@ -158,22 +158,24 @@ async function saveCalendar(em: EntityManager, category: Category, currentData: 
   await em.save(calendar);
 }
 
-export function handler(): Promise<void> {
-  return createConnection().then(async connection => {
-    const [
-      generalCalendarData,
-      comicCalendarData,
-      lightnovelCalendarData
-    ] = await Promise.all([
-      findCalendarUrl('https://ridibooks.com/').then(url => crawlCalendar(url)),
-      crawlCalendar('https://ridibooks.com/event/11339'),
-      crawlCalendar('https://ridibooks.com/event/11342')
-    ]);
+export async function handler() {
+  const connection = await createConnection();
+  const [
+    generalCalendarData,
+    comicCalendarData,
+    lightnovelCalendarData
+  ] = await Promise.all([
+    // 일반
+    findCalendarUrl('https://ridibooks.com/').then(url => crawlCalendar(url)),
+    // 만화
+    crawlCalendar('https://ridibooks.com/event/11339'),
+    // 라노벨
+    crawlCalendar('https://ridibooks.com/event/11342')
+  ]);
 
-    await connection.transaction('SERIALIZABLE', async em => {
-      await saveCalendar(em, 'general', generalCalendarData);
-      await saveCalendar(em, 'comic', comicCalendarData);
-      await saveCalendar(em, 'lightnovel', lightnovelCalendarData);
-    });
-  }).catch(error => console.error(error));
+  await connection.transaction('SERIALIZABLE', async em => {
+    await saveCalendar(em, 'general', generalCalendarData);
+    await saveCalendar(em, 'comic', comicCalendarData);
+    await saveCalendar(em, 'lightnovel', lightnovelCalendarData);
+  });
 }

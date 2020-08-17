@@ -1,5 +1,3 @@
-import "reflect-metadata";
-
 import * as fs from 'fs';
 import * as crypto from 'crypto';
 import axios from 'axios';
