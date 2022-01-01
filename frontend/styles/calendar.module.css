@@ -5,32 +5,70 @@
 }
 
 .header {
-  display: flex;
   padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #999;
+}
+
+.header .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .yearMonth {
-  font-size: 18px;
+  font-size: 20px;
   margin: 0;
 }
 
 .nav {
-  margin-left: 20px;
+  display: flex;
   font-size: 16px;
+  margin-top: 10px;
 }
 
-.nav a {
-  margin-right: 10px;
+.nav .navItemBase:first-child {
+  margin-left: 0;
+}
+
+.navItemBase {
+  padding: 6px 0;
+  margin-left: 20px;
+  display: block;
+}
+
+.navItem {
+  composes: navItemBase;
+}
+
+.navItem:hover {
+  color: var(--color-primary);
+}
+
+.activeNavItem {
+  composes: navItemBase;
+  color: var(--color-primary);
+  font-weight: bold;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 4px;
 }
 
 .badgeLegend {
-  margin-left: auto; 
+  display: flex;
+  margin-top: 20px;
 }
 
 .dateContainer {
   border-top: 1px solid #ccc;
   padding: 30px 0;
   letter-spacing: -0.03em;
+}
+
+.dateContainer:first-child {
+  border-top: 0;
 }
 
 .dateTitle {
@@ -91,6 +129,10 @@
   margin-left: 5px;
 }
 
+.badgeLegend .badgeWithLabel:first-child {
+  margin-left: 0;
+}
+
 .badgeWithLabel {
   display: inline-flex;
   font-size: 14px;
@@ -104,6 +146,17 @@
 }
 
 @media (min-width: 900px) {
+  .header .container {
+    flex-direction: row;
+  }
+  .nav {
+    margin-left: 20px;
+    margin-top: 0;
+  }
+  .badgeLegend {
+    margin-left: auto;
+    margin-top: 0;
+  }
   .dateContainer {
     display: flex;
   }

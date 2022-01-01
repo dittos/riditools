@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import Styles from '../../styles/calendar.module.css';
+import Rating from '@mui/material/Rating';
 
 const BADGES: {[key: string]: {char: string, color: string}} = {
   'RIDI ONLY': {
@@ -36,59 +37,63 @@ const Home: NextPage = ({ calendar }: any) => {
   }
 
   return (
-    <div className={Styles.container}>
+    <>
       <div className={Styles.header}>
-        <h1 className={Styles.yearMonth}>{calendar.yearMonth}</h1>
+        <div className={Styles.container}>
+          <h1 className={Styles.yearMonth}>{calendar.yearMonth}</h1>
 
-        <div className={Styles.nav}>
-          {[
-            {value: 'general', label: '일반'},
-            {value: 'comic', label: '만화'},
-            {value: 'lightnovel', label: '라노벨'}
-          ].map(({ value, label }) => (
-            <Link href={`/calendar/${value}`}>
-              <a>{label}</a>
-            </Link>
-          ))}
-        </div>
+          <div className={Styles.nav}>
+            {[
+              {value: 'general', label: '일반'},
+              {value: 'comic', label: '만화'},
+              {value: 'lightnovel', label: '라노벨'}
+            ].map(({ value, label }) => (
+              <Link href={`/calendar/${value}`}>
+                <a className={value === calendar.category ? Styles.activeNavItem : Styles.navItem}>{label}</a>
+              </Link>
+            ))}
+          </div>
 
-        <div className={Styles.badgeLegend}>
-          {Object.keys(BADGES).map(it => (
-            <div className={Styles.badgeWithLabel}>
-              <span className={Styles.badge} style={{ backgroundColor: BADGES[it]?.color }}>{BADGES[it]?.char ?? it[0]}</span>
-              <span>{it}</span>
-            </div>
-          ))}
+          <div className={Styles.badgeLegend}>
+            {Object.keys(BADGES).map(it => (
+              <div className={Styles.badgeWithLabel}>
+                <span className={Styles.badge} style={{ backgroundColor: BADGES[it]?.color }}>{BADGES[it]?.char ?? it[0]}</span>
+                <span>{it}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {dateGroups.map(group => (<>
-        <section className={Styles.dateContainer}>
-          <h3 className={Styles.dateTitle}>
-            {new Intl.DateTimeFormat('ko-KR', { day: 'numeric', weekday: 'short' }).format(new Date(group.date))}
-          </h3>
-          <table className={Styles.dateTable}>
-            <tbody>
-              {group.entries.map((entry: any, i: number) => (
-                <tr key={"row-" + i}>
-                  <td className={Styles.titleCell}>
-                    {entry.title}
-                  </td>
-                  <td className={Styles.authorCell}>
-                    {entry.authors}
-                  </td>
-                  <td className={Styles.badgeCell}>
-                    <div className={Styles.badgeContainer}>
-                      {entry.badges.map((it: string) => <span className={Styles.badge} style={{ backgroundColor: BADGES[it]?.color }}>{BADGES[it]?.char ?? it[0]}</span>)}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </>))}
-    </div>
+      <div className={Styles.container}>
+        {dateGroups.map(group => (<>
+          <section className={Styles.dateContainer}>
+            <h3 className={Styles.dateTitle}>
+              {new Intl.DateTimeFormat('ko-KR', { day: 'numeric', weekday: 'short' }).format(new Date(group.date))}
+            </h3>
+            <table className={Styles.dateTable}>
+              <tbody>
+                {group.entries.map((entry: any, i: number) => (
+                  <tr key={"row-" + i}>
+                    <td className={Styles.titleCell}>
+                      {entry.title}
+                    </td>
+                    <td className={Styles.authorCell}>
+                      {entry.authors}
+                    </td>
+                    <td className={Styles.badgeCell}>
+                      <div className={Styles.badgeContainer}>
+                        {entry.badges.map((it: string) => <span className={Styles.badge} style={{ backgroundColor: BADGES[it]?.color }}>{BADGES[it]?.char ?? it[0]}</span>)}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </>))}
+      </div>
+    </>
   )
 }
 
