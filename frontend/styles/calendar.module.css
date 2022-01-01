@@ -1,0 +1,125 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  padding: 20px 0;
+}
+
+.yearMonth {
+  font-size: 18px;
+  margin: 0;
+}
+
+.nav {
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+.nav a {
+  margin-right: 10px;
+}
+
+.badgeLegend {
+  margin-left: auto; 
+}
+
+.dateContainer {
+  border-top: 1px solid #ccc;
+  padding: 30px 0;
+  letter-spacing: -0.03em;
+}
+
+.dateTitle {
+  margin: 0;
+  white-space: nowrap;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+.dateTable {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: -14px;
+}
+
+.dateTable td {
+  padding: 14px 0 0;
+  vertical-align: top;
+}
+
+.titleCell {
+  font-size: 16px;
+}
+
+.authorCell {
+  min-width: 60px;
+  padding-left: 10px !important;
+  padding-top: 16px !important;
+  font-size: 14px;
+  color: #666;
+}
+
+.badgeCell {
+  min-width: 69px;
+  padding-left: 10px !important;
+}
+
+.badgeContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.badge {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 100px;
+  background-color: #666;
+  color: #fff;
+  cursor: default;
+}
+
+.badgeContainer .badge {
+  margin-left: 5px;
+}
+
+.badgeWithLabel {
+  display: inline-flex;
+  font-size: 14px;
+  margin-left: 20px;
+  line-height: 1;
+  align-items: center;
+}
+
+.badgeWithLabel .badge {
+  margin-right: 5px;
+}
+
+@media (min-width: 900px) {
+  .dateContainer {
+    display: flex;
+  }
+  .dateTitle {
+    width: 130px;
+    line-height: 30px;
+    margin-top: -4px;
+    padding-bottom: 0;
+  }
+  .authorCell {
+    width: 170px;
+    padding-left: 20px !important;
+    font-size: 14px;
+  }
+  .badgeCell {
+    width: 89px;
+    padding-left: 20px !important;
+  }
+}
