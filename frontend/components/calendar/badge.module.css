@@ -1,0 +1,24 @@
+.badge {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 100px;
+  background-color: #666;
+  color: #fff;
+  cursor: default;
+}
+
+.badgeWithLabel {
+  display: inline-flex;
+  font-size: 14px;
+  line-height: 1;
+  align-items: center;
+}
+
+.badgeWithLabel .badge {
+  margin-right: 5px;
+}
