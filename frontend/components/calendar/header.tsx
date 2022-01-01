@@ -2,9 +2,9 @@ import Link from 'next/link'
 import React from 'react'
 import { BadgeWithLabel } from './badge'
 import Styles from './header.module.css'
-import { BADGES } from './utils'
+import { BADGES, CalendarDto } from './utils'
 
-export const Header = ({ calendar }: { calendar: any }) => {
+export const Header = ({ calendar }: { calendar: CalendarDto }) => {
   return (
     <div className={Styles.header}>
       <div className={Styles.container}>

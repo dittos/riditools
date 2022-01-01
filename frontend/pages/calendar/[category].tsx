@@ -3,6 +3,7 @@ import React from 'react'
 import Styles from '../../styles/calendar.module.css';
 import { Header } from '../../components/calendar/header';
 import { DateGroup, Table } from '../../components/calendar/table';
+import { CalendarDto } from '../../components/calendar/utils';
 
 function groupByDate(entries: any[]): DateGroup[] {
   const dateGroups: DateGroup[] = []
@@ -19,7 +20,7 @@ function groupByDate(entries: any[]): DateGroup[] {
   return dateGroups
 }
 
-const Home: NextPage = ({ calendar }: any) => {
+const Home: NextPage<{ calendar: CalendarDto }> = ({ calendar }) => {
   const dateGroups = groupByDate(calendar.entries)
 
   return (
