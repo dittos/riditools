@@ -63,10 +63,19 @@
 
 .badgeLegend .badge {
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .badgeLegend .badge:first-child {
   margin-left: 0;
+}
+
+.activeBadge {
+  font-weight: bold;
+}
+
+.inactiveBadge {
+  opacity: 0.5;
 }
 
 @media (min-width: 900px) {

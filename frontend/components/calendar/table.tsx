@@ -1,13 +1,18 @@
 import Styles from './table.module.css';
 import { Badge } from './badge';
 import Rating from '@mui/material/Rating';
+import { CalendarEntry } from './utils';
 
 export type DateGroup = {
   date: string
-  entries: any[]
+  entries: CalendarEntry[]
 }
 
-export const Table = ({ group }: { group: DateGroup }) => {
+type Props = {
+  group: DateGroup
+}
+
+export const Table = ({ group }: Props) => {
   return (
     <section className={Styles.dateContainer}>
       <h3 className={Styles.dateTitle}>
@@ -25,7 +30,7 @@ export const Table = ({ group }: { group: DateGroup }) => {
               </td>
               <td className={Styles.badgeCell}>
                 <div className={Styles.badgeContainer}>
-                  {entry.badges.map((it: string) => <div className={Styles.badge}><Badge text={it} /></div>)}
+                  {entry.badges.map((it: string) => <div className={Styles.badge}><Badge badge={it} /></div>)}
                 </div>
               </td>
             </tr>

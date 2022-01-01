@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
-import React from 'react'
+import React, { useState } from 'react'
 import Styles from '../../styles/calendar.module.css';
 import { Header } from '../../components/calendar/header';
 import { DateGroup, Table } from '../../components/calendar/table';
@@ -21,15 +21,27 @@ function groupByDate(entries: any[]): DateGroup[] {
 }
 
 const Home: NextPage<{ calendar: CalendarDto }> = ({ calendar }) => {
-  const dateGroups = groupByDate(calendar.entries)
+  const [badgeFilter, setBadgeFilter] = useState<string | null>(null)
+
+  let filteredEntries = calendar.entries
+  if (badgeFilter) {
+    filteredEntries = filteredEntries.filter(it => it.badges.indexOf(badgeFilter) !== -1)
+  }
+  const dateGroups = groupByDate(filteredEntries)
 
   return (
     <>
-      <Header calendar={calendar} />
+      <Header
+        calendar={calendar}
+        badgeFilter={badgeFilter}
+        onBadgeFilterToggle={badge => badge === badgeFilter ? setBadgeFilter(null) : setBadgeFilter(badge)}
+      />
 
       <div className={Styles.container}>
         {dateGroups.map(group => (
-          <Table group={group} />
+          <Table
+            group={group}
+          />
         ))}
       </div>
     </>

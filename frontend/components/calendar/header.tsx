@@ -4,7 +4,13 @@ import { BadgeWithLabel } from './badge'
 import Styles from './header.module.css'
 import { BADGES, CalendarDto } from './utils'
 
-export const Header = ({ calendar }: { calendar: CalendarDto }) => {
+type Props = {
+  calendar: CalendarDto
+  badgeFilter: string | null
+  onBadgeFilterToggle(badge: string): void
+}
+
+export const Header = ({ calendar, badgeFilter, onBadgeFilterToggle }: Props) => {
   return (
     <div className={Styles.header}>
       <div className={Styles.container}>
@@ -24,8 +30,8 @@ export const Header = ({ calendar }: { calendar: CalendarDto }) => {
 
         <div className={Styles.badgeLegend}>
           {Object.keys(BADGES).map(it => (
-            <div className={Styles.badge}>
-              <BadgeWithLabel text={it} />
+            <div className={`${Styles.badge} ${badgeFilter ? (it === badgeFilter ? Styles.activeBadge : Styles.inactiveBadge) : ''}`} onClick={() => onBadgeFilterToggle(it)}>
+              <BadgeWithLabel badge={it} />
             </div>
           ))}
         </div>
